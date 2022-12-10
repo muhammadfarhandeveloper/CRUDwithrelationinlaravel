@@ -12,7 +12,13 @@ class DepartmentController extends Controller
 
     //    $dp =  Department::all();  ORM 
 
-       $dp =  DB::select('select * from deparments');
+    //    $dp =  DB::select('select * from deparments');
+
+           $dp =  DB::table('deparments')->get();
+
+        //    print_r(DB::table('deparments')->where('dname','like','%a%')->orWhere('did',5)->get());
+        //    print_r(DB::table('deparments')->whereIn('dname',['admin','hr'])->get());
+
 
         return view('department.index')->with('dp',$dp); 
     }

@@ -5,6 +5,29 @@
 
 
 <h1 class="text-center">index of Employee</h1>
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-3">
+            <form action="">
+
+                <div class="input-group">
+                    <input type="search" name="search" value="{{$search}}" placeholder="Searching...." class="form-control" />
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+
+                <select name="sort" id="" class="form-select">
+                    <option value="asc">A to Z</option>
+                    <option value="desc">Z to A</option>
+                </select>
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+<br><br>
+
 <div class="container">
 
     <table class="table">
