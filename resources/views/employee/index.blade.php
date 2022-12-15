@@ -3,11 +3,21 @@
 
 @section('content')
 
+@if (session()->has('email'))
+{{session()->get('email')}}
+@else
+<p>Guest</p>
+@endif
+
+    
 
 <h1 class="text-center">index of Employee</h1>
 <br><br>
 <div class="container">
     <div class="row">
+        <a href="{{url('employee/insert')}}">
+            <button class="btn btn-primary">Add Employee</button>
+        </a>
         <div class="offset-md-3 col-md-3">
             <form action="">
 
@@ -29,6 +39,19 @@
 <br><br>
 
 <div class="container">
+
+    @if(session()->has('status'))
+
+    <div class="alert alert-success" role="alert">
+        {{session()->get('status')}}
+    </div>
+
+        @endif
+
+        {{session()->get('name')}}
+
+    
+
 
     <table class="table">
         <thead>
@@ -61,7 +84,20 @@
 </tbody>
 </table>
 
+
+<div class="row">
+
+    {{$emp->links()}}
+
+    <p>{{$emp->total()}}</p>
+    <p>{{$emp->currentpage()}}</p>
+
 </div>
 
+<style>
+    .w-5{
+        display: none;
+    }
+</style>
 
 @endsection

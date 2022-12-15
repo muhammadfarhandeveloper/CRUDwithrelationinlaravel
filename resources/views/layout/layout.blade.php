@@ -49,7 +49,8 @@
 
 
 
-      <footer class="fixed-bottom">
+      <br><br>      <br><br>      <br><br>
+      <footer class="fixed-bottom mt-5 bg-primary text-white">
         <p>&copy; All rights reserved by Farhan</p>
       </footer>
 

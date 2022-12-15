@@ -2,6 +2,8 @@
 
 @section('content')
 
+
+
 <div class="container mt-5">
     <div class="row">
         <div class="offset-md-3 col-md-6">

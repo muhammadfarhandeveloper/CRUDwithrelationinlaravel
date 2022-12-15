@@ -14,10 +14,11 @@ class DepartmentController extends Controller
 
     //    $dp =  DB::select('select * from deparments');
 
-           $dp =  DB::table('deparments')->get();
+           $dp =  Department::all();
 
         //    print_r(DB::table('deparments')->where('dname','like','%a%')->orWhere('did',5)->get());
         //    print_r(DB::table('deparments')->whereIn('dname',['admin','hr'])->get());
+
 
 
         return view('department.index')->with('dp',$dp); 
@@ -34,6 +35,7 @@ class DepartmentController extends Controller
       $result =  DB::insert("insert into deparments(dname,dlocation) values(?,?)",[$req['dname'],$req['dlocation']]);
 
       if($result > 0){
+        session()->flash('status','Data Inserted');
         return redirect('/department');
       }
       else{
@@ -62,23 +64,64 @@ class DepartmentController extends Controller
         $result = DB::update("update deparments set dname = '$req[dname]' , dlocation = '$req[dlocation]' where did = $id ");
 
         if($result){
+            session()->flash('status','Data Updated');
+
             return redirect('/department');
         }
 
-        return back();
+            return redirect('/department');
 
     }
-    public function delete($id){
 
-        $dp = DB::select("select * from deparments where did = $id");
+
+    public function trashdata(){
+
+        $dp = Department::onlyTrashed()->get();
+
+        return view('department.index-trash')->with('dp',$dp);
+
+    }
+
+    public function deleteper($id){
+
+        $dp = Department::onlyTrashed()->find($id);
 
         if(!is_null($dp)){
 
-            $result = DB::delete('delete from deparments where did = ?',[$id]);
-
-            if($result){
+            $dp->forceDelete();
+                
                 return redirect('/department');
-            }
+        } 
+
+    }
+    
+    public function restore($id){
+
+        $dp = Department::withTrashed()->find($id);
+
+        if(!is_null($dp)){
+
+            $dp->restore();
+
+            return redirect('/department');
+        }
+
+    }
+
+
+
+
+    public function delete($id){
+
+        $dp = Department::find($id);
+
+        if(!is_null($dp)){
+            session()->flash('status1','Data Deleted');
+            
+            $dp->delete();
+                
+                return redirect('/department');
+            
         }
 
         return redirect('/department');

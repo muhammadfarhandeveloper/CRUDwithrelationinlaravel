@@ -17,7 +17,7 @@ class EmployeeController extends Controller
         $emp = DB::table('employees')->
         join('deparments','employees.did','=','deparments.did')->
         select('employees.*','deparments.dname','deparments.dlocation')
-        ->where('name','like',"$search%")->orderBy('name',$sort)->get();
+        ->where('name','like',"$search%")->orderBy('name',$sort)->paginate(6);
 
         return view('employee.index',compact('emp','search'));
 
@@ -37,6 +37,8 @@ class EmployeeController extends Controller
             $req['name'],$req['email'],$req['age'],$req['dname']]);
 
             if($result){
+
+                session()->flash('status','Data Inserted');
                 return redirect('/employee');
             }
 
@@ -66,6 +68,11 @@ class EmployeeController extends Controller
             [$req['name'],$req['email'],$req['age'],$req['dname'],$id]);
 
             if($result){
+                
+                session()->flash('status','Data Updated');
+
+                session()->put('name','farhan');
+
                 return redirect('/employee');
             }
 

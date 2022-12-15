@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 class StudentController extends Controller
 {
 
+    
     public function index(){
 
         $st = Student::all(); 

@@ -30,7 +30,7 @@
         <td>{{$row->email}}</td>
         <td>{{$row->password}}</td>
         <td><img src="{{url('/')}}/images/{{$row->img}}" alt="" width="60"></td>
-        <td>
+        <td>    
             <a href="{{url('student/edit')}}/{{$row->stid}}" class="btn btn-primary">Edit</a>
             <a href="{{url('student/delete')}}/{{$row->stid}}" class="btn btn-danger">Delete</a>
         </td>
